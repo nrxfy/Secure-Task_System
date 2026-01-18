@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Task System</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #FFF9BD;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .wrapper {
+            width: 420px;
+        }
+
+        header {
+            background-color: #FFD6BA;
+            padding: 16px;
+            text-align: center;
+            border-radius: 16px 16px 0 0;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: #DEE791;
+            padding: 22px;
+            border-radius: 0 0 16px 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #A3DC9A;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a {
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header>
+    Secure Task System<br>
+    {% if user.is_authenticated %}
+        {{ user.username }} |
+        <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+</header>
+
+<div class="card">
+    {% block content %}{% endblock %}
+</div>
+
+</div>
+
+</body>
+</html>

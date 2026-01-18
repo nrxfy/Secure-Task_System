@@ -1,0 +1,35 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<div style="background-color: #d8f3dc; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; text-align: center;">
+  <h2 style="background-color: #ffb4a2; padding: 10px; border-radius: 10px;">Welcome, {{ user.username }}</h2>
+
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
+  {% if user.profile.avatar %}
+    <p><strong>Avatar:</strong></p>
+    <img src="{{ user.profile.avatar.url }}" alt="Avatar" width="150" style="border-radius: 10px;">
+  {% endif %}
+
+  <a href="{% url 'profile_edit' %}" style="background-color: #a2d2ff; padding: 10px 20px; border-radius: 10px; display: inline-block; margin-top: 10px;">Edit Profile</a>
+
+  <hr style="margin: 30px 0;">
+
+  <h3>My Tasks</h3>
+  <a href="{% url 'task_create' %}" style="color: purple; display: inline-block; margin-bottom: 15px;">+ Add New Task</a>
+
+  {% if tasks %}
+    <ul style="list-style: none; padding: 0;">
+      {% for task in tasks %}
+        <li style="margin-bottom: 10px;">
+          <strong>{{ task.title }}</strong> - {{ task.description }}<br>
+          {% if task.is_completed %}✔{% else %}❌{% endif %}<br>
+          <a href="{% url 'task_update' task.pk %}">Edit</a> |
+          <a href="{% url 'task_delete' task.pk %}">Delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tasks yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "tasks/base.html" %}
+
+{% block content %}
+<h3 style="text-align:center; margin-bottom:15px;">
+    Create Account
+</h3>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div style="margin-bottom:14px;">
+            <label style="font-weight:600;">{{ field.label }}</label>
+            {{ field }}
+
+            {% if field.errors %}
+                <div style="
+                    font-size:12px;
+                    color:#555;
+                    margin-top:4px;
+                ">
+                    {{ field.errors|striptags }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit">Register</button>
+</form>
+
+<p style="text-align:center; margin-top:12px; font-size:14px;">
+    Already have an account?
+    <a href="{% url 'login' %}">Login</a>
+</p>
+{% endblock %}

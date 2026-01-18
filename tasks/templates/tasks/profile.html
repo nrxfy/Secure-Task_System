@@ -1,0 +1,100 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+
+<style>
+    .profile-card {
+        max-width: 600px;
+        margin: 30px auto;
+        background: #e9f7ef;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+        background: #ffccb3;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    .profile-info {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .profile-info p {
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 18px;
+        background: #9ad0f5;
+        color: #000;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background: #7bbce6;
+    }
+
+    .task-section {
+        margin-top: 30px;
+        background: #d4f1f4;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .task-section h3 {
+        text-align: center;
+    }
+
+    .add-task {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="profile-card">
+
+```
+<div class="profile-header">
+    Welcome, {{ user.username }}
+</div>
+
+<div class="profile-info">
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {% if user.is_staff %}Admin{% else %}Normal User{% endif %}</p>
+
+    <a href="{% url 'profile_edit' %}" class="btn">Edit Profile</a>
+</div>
+
+<div class="task-section">
+    <h3>My Tasks</h3>
+
+    <a href="{% url 'task_create' %}" class="add-task">➕ Add New Task</a>
+
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>{{ task.title }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="text-align:center;">No tasks yet.</p>
+    {% endif %}
+</div>
+```
+
+</div>
+{% endblock %}
